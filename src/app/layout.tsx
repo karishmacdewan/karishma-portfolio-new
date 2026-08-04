@@ -78,7 +78,7 @@ export default function RootLayout({
             <body className={`${spaceGrotesk.className} ${instrumentSerifRegular.variable} ${instrumentSerifItalic.variable}`}>
                 <Analytics />
                 <SpeedInsights />
-                <ThemeProvider attribute="class" defaultTheme="system" enableSystem enableColorScheme storageKey="karishma-theme">
+                <ThemeProvider attribute="class" defaultTheme="dark" enableColorScheme storageKey="karishma-theme">
                     {children}
                     <Toaster />
                 </ThemeProvider>

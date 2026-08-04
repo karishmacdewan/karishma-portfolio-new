@@ -3,30 +3,65 @@
   --font-sans: Geist, "Geist Sans", ui-sans-serif, system-ui, sans-serif;
   --font-serif: var(--font-instrument-serif-regular), "Instrument Serif",
     Georgia, serif;
-  --contact-bg: #e9e3db;
-  --text-primary: #1d191c;
-  --text-secondary: rgb(29 25 28 / 58%);
-  --divider: rgb(29 25 28 / 11%);
-  --accent: #b9637c;
-  --card-bg: rgb(29 25 28 / 2.5%);
-  --card-border: rgb(29 25 28 / 14%);
+  --contact-bg: #090b0e;
+  --contact-surface: #0c2429;
+  --contact-surface-hover: #14343a;
+  --contact-border: rgb(113 132 146 / 20%);
+  --contact-text: #cecac2;
+  --contact-muted: rgb(165 169 170 / 68%);
+  --contact-slate: #718492;
+  --contact-teal: #37626a;
+  --contact-accent: #c9798c;
+  --text-primary: var(--contact-text);
+  --text-secondary: var(--contact-muted);
+  --divider: var(--contact-border);
+  --accent: var(--contact-accent);
+  --card-bg: linear-gradient(135deg, rgb(20 52 58 / 82%), rgb(12 36 41 / 72%));
+  --card-bg-hover: linear-gradient(
+    135deg,
+    rgb(26 65 72 / 90%),
+    rgb(20 52 58 / 82%)
+  );
+  --card-border: rgb(113 132 146 / 26%);
 
-  min-height: calc(100svh - 82px);
   height: auto;
-  padding: 78px 0 42px;
-  border-top: 1px solid var(--divider);
-  background: var(--contact-bg);
-  color: var(--text-primary);
+  min-height: 0;
+  margin-top: 0;
+  padding: 82px 0 48px;
+  border-top: 1px solid rgb(113 132 146 / 16%);
+  background: radial-gradient(
+      ellipse at 15% 42%,
+      rgb(26 65 72 / 34%) 0%,
+      rgb(12 36 41 / 18%) 34%,
+      transparent 66%
+    ),
+    radial-gradient(
+      ellipse at 88% 18%,
+      rgb(55 98 106 / 15%) 0%,
+      transparent 54%
+    ),
+    var(--contact-bg);
+  color: var(--contact-text);
 }
 
 :global(.light) .contactSection {
-  --contact-bg: #e9e3db;
-  --text-primary: #1d191c;
-  --text-secondary: rgb(29 25 28 / 58%);
-  --divider: rgb(29 25 28 / 11%);
-  --accent: #b9637c;
-  --card-bg: rgb(29 25 28 / 2.5%);
-  --card-border: rgb(29 25 28 / 14%);
+  --contact-bg: #cecac2;
+  --contact-surface: rgb(113 132 146 / 13%);
+  --contact-surface-hover: rgb(113 132 146 / 18%);
+  --contact-text: #090b0e;
+  --contact-muted: rgb(9 11 14 / 58%);
+  --contact-border: rgb(26 65 72 / 20%);
+  --contact-accent: #c9798c;
+  --text-primary: var(--contact-text);
+  --text-secondary: var(--contact-muted);
+  --divider: var(--contact-border);
+  --accent: var(--contact-accent);
+  --card-bg: var(--contact-surface);
+  --card-bg-hover: var(--contact-surface-hover);
+  --card-border: var(--contact-border);
+
+  border-top-color: var(--contact-border);
+  background: var(--contact-bg);
 }
 
 .contactContent {
@@ -38,13 +73,12 @@
 
 .contactInner {
   display: grid;
-  width: min(1120px, calc(100% - 64px));
-  grid-template-columns: minmax(0, 1.05fr) minmax(360px, 0.72fr);
+  width: min(1120px, calc(100% - 80px));
+  grid-template-columns: minmax(0, 1.08fr) minmax(360px, 0.78fr);
   align-items: start;
-  column-gap: clamp(56px, 7vw, 94px);
+  column-gap: clamp(62px, 7vw, 92px);
   margin-inline: auto;
   padding-bottom: 0;
-  background: var(--contact-bg);
 }
 
 .leftColumn,
@@ -54,9 +88,9 @@
 
 .contactActions {
   width: 100%;
-  max-width: 414px;
+  max-width: 420px;
   justify-self: end;
-  margin-top: 4px;
+  margin-top: 6px;
 }
 
 .eyebrow {
@@ -115,7 +149,8 @@
   width: 100%;
   border: 1px solid var(--card-border);
   background: var(--card-bg);
-  color: var(--text-primary);
+  color: var(--contact-text);
+  box-shadow: none;
   transition:
     border-color 240ms ease,
     background 240ms ease,
@@ -130,7 +165,7 @@
 .emailCard {
   display: flex;
   width: 100%;
-  height: 108px;
+  height: 106px;
   min-height: 0;
   align-items: center;
   justify-content: flex-start;
@@ -139,7 +174,8 @@
   border-radius: 16px;
 
   &:hover {
-    border-color: var(--accent);
+    border-color: rgb(113 132 146 / 48%);
+    background: var(--card-bg-hover);
     transform: translateY(-2px);
 
     .cardArrow {
@@ -214,11 +250,12 @@
   justify-content: flex-start;
   gap: 20px;
   margin-top: 12px;
-  padding: 20px 24px;
+  padding: 19px 24px;
   border-radius: 16px;
 
   &:hover {
-    border-color: var(--accent);
+    border-color: rgb(113 132 146 / 48%);
+    background: var(--card-bg-hover);
     transform: translateY(-2px);
 
     .cardArrow,
@@ -257,13 +294,12 @@
 .contactMeta {
   display: flex;
   grid-column: 1 / -1;
-  width: min(760px, 100%);
+  width: 100%;
   align-items: center;
   justify-content: flex-end;
   gap: 24px;
-  justify-self: end;
-  margin-top: 62px;
-  padding-top: 16px;
+  margin-top: 50px;
+  padding-top: 15px;
   padding-bottom: 0;
   border-top: 1px solid var(--divider);
   color: var(--text-secondary);

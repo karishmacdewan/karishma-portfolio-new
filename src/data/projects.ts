@@ -7,7 +7,7 @@ const companyExperience = [
     ['Google', '/client-logos/google-card.png', 'google'],
     ['Amazon', '/client-logos/amazon-card.png', 'amazon'],
     ['Deutsche Bank', '/client-logos/deutsche-bank-primary-blue.png', 'deutsche-bank'],
-    ['UK Gov', '/client-logos/uk-government-dark.png', 'uk-government'],
+    ['Liberty', '/client-logos/liberty-card.png', 'liberty'],
     ['Mesha', '/client-logos/mesha-card.png', 'mesha'],
     ['Samsung', '/client-logos/samsung-card.png', 'samsung'],
     ['Huawei', '/client-logos/huawei-card.png', 'huawei'],
