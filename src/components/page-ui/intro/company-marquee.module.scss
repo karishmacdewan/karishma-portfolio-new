@@ -1,0 +1,271 @@
+.marquee {
+  --footer-height: 7.3rem;
+
+  position: fixed;
+  z-index: 15;
+  width: 100vw;
+  height: 100svh;
+  overflow: hidden;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 350ms ease;
+  inset: 0;
+
+  &[data-mode="showcase"],
+  &[data-mode="footer"] {
+    opacity: 1;
+  }
+}
+
+.showcaseLayer,
+.bannerLayer {
+  position: absolute;
+  right: 0;
+  left: 0;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.showcaseLayer {
+  top: 0;
+  display: grid;
+  width: 100%;
+  height: 100%;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-rows: repeat(2, minmax(0, 1fr));
+  gap: clamp(2rem, 3vw, 4rem);
+  padding: clamp(14rem, 18vh, 20rem) clamp(2rem, 5vw, 7rem) clamp(3rem, 7vh, 7rem);
+  background: rgb(3 3 3 / 22%);
+  backdrop-filter: blur(0.8rem);
+  transition: opacity 420ms ease;
+}
+
+.marquee[data-mode="showcase"] .showcaseLayer {
+  opacity: 1;
+}
+
+.bannerLayer {
+  bottom: 0;
+  height: var(--footer-height);
+  opacity: 0;
+  transform: translateY(1.6rem);
+  transition:
+    opacity 500ms ease 420ms,
+    transform 700ms cubic-bezier(0.22, 1, 0.36, 1) 420ms;
+}
+
+.marquee[data-mode="footer"] .bannerLayer {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.viewport {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: #030303;
+
+  &::before,
+  &::after {
+    position: absolute;
+    z-index: 3;
+    top: 0;
+    bottom: 0;
+    width: clamp(3rem, 10vw, 14rem);
+    content: "";
+    pointer-events: none;
+  }
+
+  &::before {
+    left: 0;
+    background: linear-gradient(90deg, #030303, transparent);
+  }
+
+  &::after {
+    right: 0;
+    background: linear-gradient(-90deg, #030303, transparent);
+  }
+}
+
+.track {
+  display: flex;
+  width: max-content;
+  height: 100%;
+  align-items: center;
+  animation: marquee 20s linear infinite;
+  animation-play-state: paused;
+  will-change: transform;
+}
+
+.marquee[data-marquee-active="true"] .track {
+  animation-play-state: running;
+}
+
+.companyList {
+  display: flex;
+  flex: none;
+  align-items: center;
+  gap: clamp(5.2rem, 7vw, 9rem);
+  padding-inline: clamp(3rem, 4vw, 5.5rem);
+}
+
+.company {
+  position: relative;
+  display: flex;
+  width: clamp(16rem, 18vw, 24rem);
+  height: 5.8rem;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  overflow: visible;
+  border: 0;
+  background: transparent;
+
+  img {
+    padding: 0.3rem 0.5rem;
+    object-fit: contain;
+    user-select: none;
+  }
+}
+
+.logoFloat {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  transform-origin: center;
+}
+
+.showcaseLayer > .companyList {
+  display: contents;
+}
+
+.showcaseLayer .company {
+  width: 100%;
+  height: 100%;
+  min-height: 7rem;
+
+  img {
+    padding: clamp(1rem, 2vw, 2.4rem);
+  }
+}
+
+.showcaseLayer .company:nth-child(3n + 1) .logoFloat {
+  animation: logo-float-a 5.8s ease-in-out -1.2s infinite alternate;
+}
+
+.showcaseLayer .company:nth-child(3n + 2) .logoFloat {
+  animation: logo-float-b 6.7s ease-in-out -3.4s infinite alternate;
+}
+
+.showcaseLayer .company:nth-child(3n) .logoFloat {
+  animation: logo-float-c 7.4s ease-in-out -2.1s infinite alternate;
+}
+
+.deutscheBank {
+  transform: scale(1.12);
+}
+
+.deloitte {
+  transform: scale(1.04);
+}
+
+.barclays {
+  transform: scale(1.12);
+}
+
+.ukGovernment {
+  transform: scale(1.06);
+}
+
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes logo-float-a {
+  from {
+    transform: translate3d(-0.7rem, 0.45rem, 0) rotate(-0.8deg);
+  }
+
+  to {
+    transform: translate3d(0.8rem, -0.65rem, 0) rotate(0.9deg);
+  }
+}
+
+@keyframes logo-float-b {
+  from {
+    transform: translate3d(0.55rem, -0.7rem, 0) rotate(0.7deg);
+  }
+
+  to {
+    transform: translate3d(-0.75rem, 0.55rem, 0) rotate(-1deg);
+  }
+}
+
+@keyframes logo-float-c {
+  from {
+    transform: translate3d(-0.4rem, -0.5rem, 0) rotate(0.55deg) scale(0.99);
+  }
+
+  to {
+    transform: translate3d(0.65rem, 0.7rem, 0) rotate(-0.65deg) scale(1.015);
+  }
+}
+
+@media (max-width: 768px) {
+  .marquee {
+    --footer-height: calc(5.7rem + env(safe-area-inset-bottom));
+  }
+
+  .showcaseLayer {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-rows: repeat(4, minmax(0, 1fr));
+    gap: 1.4rem;
+    padding: clamp(10rem, 15svh, 13rem) 1.4rem max(2rem, env(safe-area-inset-bottom));
+  }
+
+  .showcaseLayer .company {
+    min-height: 5.4rem;
+
+    img {
+      padding: 0.9rem;
+    }
+  }
+
+  .track {
+    animation-duration: 16s;
+  }
+
+  .companyList {
+    gap: 3.2rem;
+    padding-inline: 2rem;
+  }
+
+  .bannerLayer .company {
+    width: 14rem;
+    height: 4.8rem;
+
+    img {
+      padding: 0.2rem 0.35rem;
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee,
+  .showcaseLayer,
+  .bannerLayer {
+    transition: none;
+  }
+
+  .track {
+    animation: none;
+  }
+
+  .logoFloat {
+    animation: none !important;
+  }
+}

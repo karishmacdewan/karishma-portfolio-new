@@ -1,0 +1,130 @@
+.header {
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: 50;
+  display: flex;
+  height: 6.4rem;
+  align-items: center;
+  justify-content: space-between;
+  padding: max(0.8rem, env(safe-area-inset-top)) 1.6rem 0.8rem;
+  border-bottom: 1px solid rgb(255 255 255 / 8%);
+  background: rgb(8 8 8 / 98%);
+  backdrop-filter: blur(12px);
+  pointer-events: none;
+}
+
+.logo,
+.menuButton {
+  pointer-events: auto;
+}
+
+.logo {
+  display: inline-flex;
+  min-height: 4.4rem;
+  min-width: 4.4rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.6rem;
+  background: var(--background-light);
+  font-size: var(--text-md);
+  font-weight: 900;
+  line-height: 1;
+
+  span {
+    color: var(--brand);
+  }
+}
+
+.menuButton {
+  display: inline-flex;
+  min-height: 4.4rem;
+  min-width: 4.4rem;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgb(255 255 255 / 16%);
+  border-radius: 999px;
+  background: var(--background-dark);
+  color: var(--text);
+  cursor: pointer;
+
+  svg {
+    width: 2.2rem;
+    height: 2.2rem;
+  }
+}
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  background: rgb(0 0 0 / 72%);
+  backdrop-filter: blur(8px);
+  animation: fade-in 180ms ease-out;
+}
+
+.menu {
+  position: fixed;
+  inset: 0;
+  z-index: 70;
+  display: flex;
+  flex-direction: column;
+  padding: max(1.2rem, env(safe-area-inset-top)) 1.6rem
+    max(2rem, env(safe-area-inset-bottom));
+  background: var(--background-dark);
+  animation: menu-in 240ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.menuHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: clamp(4rem, 12vh, 10rem);
+
+  h2 {
+    font-size: var(--text-md);
+    font-weight: 700;
+  }
+}
+
+.menuLink {
+  display: grid;
+  grid-template-columns: 4rem 1fr;
+  min-height: 6.4rem;
+  align-items: center;
+  border-bottom: 1px solid rgb(255 255 255 / 12%);
+  font-size: clamp(2.8rem, 8vw, 5.6rem);
+  font-weight: 800;
+
+  span {
+    color: var(--brand);
+    font-size: 1.2rem;
+    font-weight: 500;
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes menu-in {
+  from {
+    opacity: 0;
+    transform: translateY(-1.6rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .overlay,
+  .menu {
+    animation: none;
+  }
+}

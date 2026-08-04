@@ -1,0 +1,1135 @@
+.desktopGallery {
+  position: relative;
+  width: 100%;
+  min-width: 0;
+  overflow: visible;
+  padding: 0;
+  perspective: 1000px;
+  transform-style: preserve-3d;
+}
+
+.desktopGrid {
+  --project-grid-gap: clamp(2.4rem, 2.4vw, 4rem);
+
+  display: flex;
+  width: min(100%, 1440px);
+  min-width: 0;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--project-grid-gap);
+  margin-inline: auto;
+  transform-style: preserve-3d;
+}
+
+.desktopGridItem {
+  width: calc((100% - (2 * var(--project-grid-gap))) / 3);
+  min-width: 0;
+  max-width: 42rem;
+}
+
+.desktopCard {
+  position: relative;
+  z-index: 0;
+  display: block;
+  width: 100%;
+  aspect-ratio: 5 / 3;
+  height: auto;
+  flex: none;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  font: inherit;
+  isolation: isolate;
+  pointer-events: auto;
+  text-align: inherit;
+
+  &:focus-visible {
+    outline: 3px solid rgb(96 165 250 / 86%);
+    outline-offset: 0.7rem;
+  }
+}
+
+.desktopCard[data-expandable="false"] {
+  cursor: default;
+}
+
+.desktopCard:not(.desktopCardStatic) {
+  perspective: 800px;
+  perspective-origin: center;
+}
+
+.desktopCardStatic {
+  .desktopCardVisual,
+  .desktopCardParallax,
+  .desktopCardRotator,
+  .desktopCardFace {
+    transform-style: flat;
+  }
+
+  .desktopCardFace {
+    transform: none;
+  }
+
+  .desktopCardSurface {
+    transform: none;
+  }
+
+  .desktopCardArtworkLayer {
+    transform: none;
+  }
+
+  .desktopCardSheen {
+    display: none;
+    transform: none;
+  }
+}
+
+@media (min-width: 1440px) {
+  .desktopGrid {
+    width: min(100%, 1440px);
+  }
+
+  .desktopGridItem {
+    width: calc((100% - (3 * var(--project-grid-gap))) / 4);
+  }
+}
+
+.desktopCardVisual,
+.touchCard {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  border-radius: 1.2rem;
+  background: var(--background-light);
+  color: var(--text);
+  text-align: left;
+}
+
+.desktopCardVisual {
+  overflow: visible;
+  background: transparent;
+  pointer-events: none;
+  transform-style: preserve-3d;
+}
+
+.desktopCardParallax {
+  position: absolute;
+  pointer-events: none;
+  transform-style: preserve-3d;
+  inset: 0;
+}
+
+.desktopCardRotator {
+  position: absolute;
+  display: block;
+  transform-style: preserve-3d;
+  border-radius: 1.2rem;
+  box-shadow: 0 2rem 5rem rgb(0 0 0 / 32%);
+  pointer-events: none;
+  transform-origin: center;
+  inset: 0;
+}
+
+.desktopCardRotatorFlipping {
+  animation: project-card-gentle-flip 1800ms cubic-bezier(0.45, 0, 0.55, 1) both;
+  will-change: transform;
+
+  .desktopCardFaceFront {
+    animation: project-card-front-face-visibility 1800ms linear both;
+  }
+
+  .desktopCardFaceBack {
+    animation: project-card-back-face-visibility 1800ms linear both;
+  }
+
+  .desktopCardSheen {
+    animation: project-card-sheen 1800ms cubic-bezier(0.45, 0, 0.55, 1) both;
+  }
+}
+
+.desktopCardFace {
+  position: absolute;
+  display: block;
+  border-radius: 1.2rem;
+  inset: 0;
+  transform: translateZ(0.7rem);
+  transform-style: preserve-3d;
+}
+
+.desktopCardFaceFront {
+  opacity: 1;
+}
+
+.desktopCardFaceBack {
+  opacity: 0;
+  transform: translateZ(0.7rem);
+}
+
+.desktopCardSurface {
+  position: absolute;
+  display: block;
+  overflow: hidden;
+  border-radius: 1.2rem;
+  background: transparent;
+  inset: 0;
+  transform: translateZ(0);
+}
+
+.desktopCardArtworkLayer {
+  position: absolute;
+  display: block;
+  overflow: hidden;
+  border-radius: 1.2rem;
+  inset: 0;
+  transform: translateZ(0.85rem);
+  transform-style: flat;
+}
+
+.desktopCardSheen {
+  position: absolute;
+  z-index: 3;
+  display: block;
+  border-radius: 1.2rem;
+  background: linear-gradient(
+    112deg,
+    transparent 20%,
+    rgb(255 255 255 / 6%) 38%,
+    rgb(255 255 255 / 46%) 50%,
+    rgb(255 255 255 / 7%) 62%,
+    transparent 80%
+  );
+  background-position: 160% 0;
+  background-size: 240% 100%;
+  mix-blend-mode: screen;
+  opacity: 0;
+  pointer-events: none;
+  inset: 0;
+  transform: translateZ(1.75rem) scale(0.978);
+}
+
+.desktopCardEdge {
+  position: absolute;
+  z-index: 0;
+  right: 1.2rem;
+  left: 1.2rem;
+  display: block;
+  height: 1.4rem;
+  border-radius: 999px;
+  background: linear-gradient(
+    180deg,
+    rgb(116 122 137 / 96%),
+    rgb(31 34 43 / 98%)
+  );
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 28%);
+  backface-visibility: hidden;
+}
+
+.desktopCardEdgeTop {
+  top: 0;
+  transform: translateY(-50%) rotateX(90deg);
+}
+
+.desktopCardEdgeBottom {
+  bottom: 0;
+  transform: translateY(50%) rotateX(-90deg);
+}
+
+.cardMedia {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  filter: none;
+  opacity: 1;
+  object-fit: cover;
+  transition:
+    filter 260ms ease,
+    transform 360ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.artworkBackground {
+  position: absolute;
+  inset: 0;
+}
+
+.containArtwork {
+  object-fit: contain;
+}
+
+@media (min-width: 769px) {
+  .desktopCoverArtwork {
+    object-fit: cover;
+  }
+}
+
+@keyframes project-card-gentle-flip {
+  0% {
+    transform: rotateX(0deg);
+    filter: drop-shadow(0 0 0 rgb(0 0 0 / 0%));
+  }
+
+  49.9% {
+    transform: rotateX(90deg);
+    filter: drop-shadow(0 0.8rem 1rem rgb(0 0 0 / 32%));
+  }
+
+  50% {
+    transform: rotateX(-90deg);
+    filter: drop-shadow(0 0.8rem 1rem rgb(0 0 0 / 32%));
+  }
+
+  100% {
+    transform: rotateX(0deg);
+    filter: drop-shadow(0 0 0 rgb(0 0 0 / 0%));
+  }
+}
+
+@keyframes project-card-front-face-visibility {
+  0%,
+  49.9% {
+    opacity: 1;
+  }
+
+  50%,
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes project-card-back-face-visibility {
+  0%,
+  49.9% {
+    opacity: 0;
+  }
+
+  50%,
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes project-card-sheen {
+  0%,
+  12% {
+    background-position: 160% 0;
+    opacity: 0;
+  }
+
+  42% {
+    opacity: 0.7;
+  }
+
+  58% {
+    opacity: 0.34;
+  }
+
+  88%,
+  100% {
+    background-position: -70% 0;
+    opacity: 0;
+  }
+}
+
+.clientLogoArtwork {
+  --client-surface: #edf1f7;
+  --client-surface-deep: #c5cfdf;
+  --client-aura: rgb(24 85 190 / 18%);
+
+  position: absolute;
+  display: grid;
+  overflow: hidden;
+  place-items: center;
+  background: radial-gradient(
+      circle at 50% 44%,
+      color-mix(in srgb, var(--client-surface) 82%, white),
+      var(--client-surface) 54%,
+      var(--client-surface-deep) 100%
+    ),
+    var(--client-surface);
+  isolation: isolate;
+  inset: 0;
+}
+
+.clientLogoArtwork::before {
+  position: absolute;
+  background-image: linear-gradient(rgb(19 35 63 / 7%) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(19 35 63 / 7%) 1px, transparent 1px);
+  background-size: 4.8rem 4.8rem;
+  content: "";
+  opacity: 0.2;
+  inset: 0;
+  mask-image: radial-gradient(circle at center, black, transparent 72%);
+}
+
+.clientLogoAura {
+  position: absolute;
+  width: min(92%, 46rem);
+  border-radius: 999px;
+  background: var(--client-aura);
+  filter: blur(5rem);
+  aspect-ratio: 1;
+}
+
+.clientLogoStage {
+  position: relative;
+  width: min(78%, 40rem);
+  height: min(58%, 22rem);
+  filter: drop-shadow(0 1.4rem 2.4rem rgb(12 31 58 / 16%));
+}
+
+.clientLogoArtwork[data-brand="barclays"] {
+  --client-surface: #00aeef;
+  --client-surface-deep: #0076b8;
+  --client-aura: rgb(255 255 255 / 24%);
+
+  .clientLogoHeroImage {
+    filter: brightness(0) invert(1);
+  }
+
+  .clientLogoStage {
+    width: min(100%, 52rem);
+    height: min(75%, 29rem);
+  }
+}
+
+.clientLogoArtwork[data-brand="deutsche-bank"] {
+  --client-surface: #003bc9;
+  --client-surface-deep: #003bc9;
+
+  background: #003bc9;
+
+  &::before,
+  .clientLogoAura {
+    display: none;
+  }
+
+  .clientLogoStage {
+    width: min(116.61%, 56.81rem);
+    height: min(92.69%, 29.9rem);
+    filter: none;
+  }
+}
+
+.clientLogoArtwork[data-brand="fab"] {
+  --client-surface: #000;
+  --client-surface-deep: #000;
+
+  background: #000;
+
+  &::before,
+  .clientLogoAura {
+    display: none;
+  }
+
+  .clientLogoStage {
+    width: min(86%, 43rem);
+    height: min(65%, 22rem);
+    filter: none;
+  }
+}
+
+.clientLogoArtwork[data-brand="home-office"] {
+  --client-surface: #f4f1eb;
+  --client-surface-deep: #d6cec2;
+  --client-aura: rgb(117 46 139 / 18%);
+
+  .clientLogoStage {
+    width: min(84%, 42rem);
+    height: min(66%, 22rem);
+  }
+}
+
+.clientLogoArtwork[data-brand="nhs"] {
+  --client-surface: #025db8;
+  --client-surface-deep: #025db8;
+
+  background: #025db8;
+
+  &::before,
+  .clientLogoAura {
+    display: none;
+  }
+
+  .clientLogoStage {
+    width: min(40%, 19rem);
+    height: min(35%, 11rem);
+    filter: none;
+  }
+}
+
+.clientLogoArtwork[data-brand="neom"] {
+  --client-surface: #f3f0eb;
+  --client-surface-deep: #cfc8bc;
+  --client-aura: rgb(23 111 130 / 16%);
+
+  .clientLogoStage {
+    width: min(86%, 43rem);
+  }
+}
+
+.clientLogoArtwork[data-brand="stripe"] {
+  --client-surface: #625bf6;
+  --client-surface-deep: #625bf6;
+
+  background: #625bf6;
+
+  &::before,
+  .clientLogoAura {
+    display: none;
+  }
+
+  .clientLogoStage {
+    width: 60%;
+    height: 60%;
+    filter: none;
+  }
+
+  .clientLogoHeroImage {
+    filter: none;
+    opacity: 1;
+    object-fit: cover;
+  }
+}
+
+.clientLogoArtwork[data-brand="uk-government"] {
+  --client-surface: #080808;
+  --client-surface-deep: #080808;
+
+  background: #080808;
+
+  &::before,
+  .clientLogoAura {
+    display: none;
+  }
+
+  .clientLogoStage {
+    width: 100%;
+    height: 100%;
+    filter: none;
+  }
+}
+
+.clientLogoArtwork[data-brand="google"],
+.clientLogoArtwork[data-brand="amazon"],
+.clientLogoArtwork[data-brand="disney"],
+.clientLogoArtwork[data-brand="universal"],
+.clientLogoArtwork[data-brand="warner-bros"],
+.clientLogoArtwork[data-brand="sony"],
+.clientLogoArtwork[data-brand="bbc"],
+.clientLogoArtwork[data-brand="samsung"],
+.clientLogoArtwork[data-brand="huawei"],
+.clientLogoArtwork[data-brand="honor"],
+.clientLogoArtwork[data-brand="careem"],
+.clientLogoArtwork[data-brand="volkswagen-group"],
+.clientLogoArtwork[data-brand="vw-group"],
+.clientLogoArtwork[data-brand="mercedes-amg"],
+.clientLogoArtwork[data-brand="mercedes-benz-group"],
+.clientLogoArtwork[data-brand="bmw"],
+.clientLogoArtwork[data-brand="toyota"],
+.clientLogoArtwork[data-brand="general-motors"],
+.clientLogoArtwork[data-brand="stellantis"] {
+  --client-surface: #f3f0eb;
+  --client-surface-deep: #d8d1c8;
+  --client-aura: rgb(45 89 98 / 14%);
+}
+
+.clientLogoArtwork[data-brand="google"] .clientLogoStage,
+.clientLogoArtwork[data-brand="amazon"] .clientLogoStage,
+.clientLogoArtwork[data-brand="sony"] .clientLogoStage,
+.clientLogoArtwork[data-brand="samsung"] .clientLogoStage,
+.clientLogoArtwork[data-brand="mercedes-amg"] .clientLogoStage,
+.clientLogoArtwork[data-brand="mercedes-benz-group"] .clientLogoStage,
+.clientLogoArtwork[data-brand="stellantis"] .clientLogoStage {
+  width: min(70%, 35rem);
+  height: min(45%, 14rem);
+}
+
+.clientLogoArtwork[data-brand="netflix"] {
+  --client-surface: #060606;
+  --client-surface-deep: #000;
+  --client-aura: rgb(229 9 20 / 18%);
+
+  background: #060606;
+}
+
+.clientLogoArtwork[data-brand="netflix"]::before,
+.clientLogoArtwork[data-brand="mesha"]::before {
+  display: none;
+}
+
+.clientLogoArtwork[data-brand="netflix"] .clientLogoStage {
+  width: min(72%, 36rem);
+  height: min(38%, 12rem);
+  filter: none;
+}
+
+.clientLogoArtwork[data-brand="mesha"] {
+  --client-surface: #000;
+  --client-surface-deep: #000;
+  --client-aura: rgb(190 255 75 / 16%);
+
+  background: #000;
+}
+
+.clientLogoArtwork[data-brand="mesha"] .clientLogoStage {
+  width: min(88%, 44rem);
+  height: min(64%, 22rem);
+  filter: none;
+}
+
+.clientLogoArtwork[data-brand="universal"] .clientLogoStage {
+  width: min(74%, 37rem);
+  height: min(64%, 20rem);
+}
+
+.clientLogoArtwork[data-brand="disney"] .clientLogoStage {
+  width: min(62%, 31rem);
+  height: min(52%, 18rem);
+}
+
+.clientLogoArtwork[data-brand="warner-bros"] .clientLogoStage,
+.clientLogoArtwork[data-brand="volkswagen-group"] .clientLogoStage,
+.clientLogoArtwork[data-brand="bmw"] .clientLogoStage {
+  width: min(36%, 18rem);
+  height: min(62%, 20rem);
+}
+
+.clientLogoArtwork[data-brand="bbc"] .clientLogoStage {
+  width: min(48%, 24rem);
+  height: min(36%, 12rem);
+}
+
+.clientLogoArtwork[data-brand="huawei"] .clientLogoStage {
+  width: min(32%, 16rem);
+  height: min(56%, 18rem);
+}
+
+.clientLogoArtwork[data-brand="careem"] {
+  --client-surface: #07110d;
+  --client-surface-deep: #010403;
+  --client-aura: rgb(79 255 69 / 14%);
+
+  background: #07110d;
+}
+
+.clientLogoArtwork[data-brand="careem"]::before {
+  display: none;
+}
+
+.clientLogoArtwork[data-brand="careem"] .clientLogoStage {
+  width: min(72%, 36rem);
+  height: min(48%, 15rem);
+  filter: none;
+}
+
+.clientLogoArtwork[data-brand="toyota"] .clientLogoStage,
+.clientLogoArtwork[data-brand="general-motors"] .clientLogoStage {
+  width: min(56%, 28rem);
+  height: min(45%, 14rem);
+}
+
+.clientLogoArtwork[data-brand="google"],
+.clientLogoArtwork[data-brand="amazon"],
+.clientLogoArtwork[data-brand="mesha"],
+.clientLogoArtwork[data-brand="netflix"],
+.clientLogoArtwork[data-brand="disney"],
+.clientLogoArtwork[data-brand="universal"],
+.clientLogoArtwork[data-brand="warner-bros"],
+.clientLogoArtwork[data-brand="sony"],
+.clientLogoArtwork[data-brand="bbc"],
+.clientLogoArtwork[data-brand="samsung"],
+.clientLogoArtwork[data-brand="huawei"],
+.clientLogoArtwork[data-brand="honor"],
+.clientLogoArtwork[data-brand="careem"],
+.clientLogoArtwork[data-brand="volkswagen-group"],
+.clientLogoArtwork[data-brand="vw-group"],
+.clientLogoArtwork[data-brand="mercedes-amg"],
+.clientLogoArtwork[data-brand="mercedes-benz-group"],
+.clientLogoArtwork[data-brand="bmw"],
+.clientLogoArtwork[data-brand="toyota"],
+.clientLogoArtwork[data-brand="general-motors"],
+.clientLogoArtwork[data-brand="owne"] {
+  background: #000;
+
+  &::before,
+  .clientLogoAura {
+    display: none;
+  }
+
+  .clientLogoStage {
+    width: 100%;
+    height: 100%;
+    filter: none;
+  }
+
+  .clientLogoHeroImage {
+    object-fit: cover;
+  }
+}
+
+.clientLogoHeroImage,
+.clientBadgeImage {
+  object-fit: contain;
+}
+
+.touchCard .clientLogoArtwork .clientLogoStage {
+  width: 86%;
+  height: 70%;
+}
+
+.touchCard .clientLogoArtwork[data-brand="deutsche-bank"] .clientLogoStage {
+  width: 107.64%;
+  height: 80.73%;
+}
+
+.touchCard .clientLogoArtwork[data-brand="fab"] .clientLogoStage {
+  width: 86%;
+  height: 65%;
+}
+
+.touchCard .clientLogoArtwork[data-brand="stripe"] .clientLogoStage {
+  width: 60%;
+  height: 60%;
+}
+
+.touchCard .clientLogoArtwork[data-brand="nhs"] .clientLogoStage {
+  width: 48%;
+  height: 39%;
+}
+
+.touchCard .clientLogoArtwork[data-brand="barclays"] .clientLogoStage {
+  width: 100%;
+  height: 91%;
+}
+
+.touchCard .clientLogoArtwork .clientLogoHeroImage {
+  object-fit: contain;
+}
+
+.touchCard .clientLogoArtwork[data-brand="google"] .clientLogoStage,
+.touchCard .clientLogoArtwork[data-brand="amazon"] .clientLogoStage,
+.touchCard .clientLogoArtwork[data-brand="mesha"] .clientLogoStage,
+.touchCard .clientLogoArtwork[data-brand="netflix"] .clientLogoStage,
+.touchCard .clientLogoArtwork[data-brand="disney"] .clientLogoStage,
+.touchCard .clientLogoArtwork[data-brand="universal"] .clientLogoStage,
+.touchCard .clientLogoArtwork[data-brand="warner-bros"] .clientLogoStage,
+.touchCard .clientLogoArtwork[data-brand="sony"] .clientLogoStage,
+.touchCard .clientLogoArtwork[data-brand="bbc"] .clientLogoStage,
+.touchCard .clientLogoArtwork[data-brand="samsung"] .clientLogoStage,
+.touchCard .clientLogoArtwork[data-brand="huawei"] .clientLogoStage,
+.touchCard .clientLogoArtwork[data-brand="honor"] .clientLogoStage,
+.touchCard .clientLogoArtwork[data-brand="careem"] .clientLogoStage,
+.touchCard .clientLogoArtwork[data-brand="volkswagen-group"] .clientLogoStage,
+.touchCard .clientLogoArtwork[data-brand="vw-group"] .clientLogoStage,
+.touchCard .clientLogoArtwork[data-brand="mercedes-amg"] .clientLogoStage,
+.touchCard
+  .clientLogoArtwork[data-brand="mercedes-benz-group"]
+  .clientLogoStage,
+.touchCard .clientLogoArtwork[data-brand="bmw"] .clientLogoStage,
+.touchCard .clientLogoArtwork[data-brand="toyota"] .clientLogoStage,
+.touchCard .clientLogoArtwork[data-brand="general-motors"] .clientLogoStage,
+.touchCard .clientLogoArtwork[data-brand="owne"] .clientLogoStage {
+  width: 100%;
+  height: 100%;
+}
+
+.touchCard .clientLogoArtwork[data-brand="google"] .clientLogoHeroImage,
+.touchCard .clientLogoArtwork[data-brand="amazon"] .clientLogoHeroImage,
+.touchCard .clientLogoArtwork[data-brand="mesha"] .clientLogoHeroImage,
+.touchCard .clientLogoArtwork[data-brand="netflix"] .clientLogoHeroImage,
+.touchCard .clientLogoArtwork[data-brand="disney"] .clientLogoHeroImage,
+.touchCard .clientLogoArtwork[data-brand="universal"] .clientLogoHeroImage,
+.touchCard .clientLogoArtwork[data-brand="warner-bros"] .clientLogoHeroImage,
+.touchCard .clientLogoArtwork[data-brand="sony"] .clientLogoHeroImage,
+.touchCard .clientLogoArtwork[data-brand="bbc"] .clientLogoHeroImage,
+.touchCard .clientLogoArtwork[data-brand="samsung"] .clientLogoHeroImage,
+.touchCard .clientLogoArtwork[data-brand="huawei"] .clientLogoHeroImage,
+.touchCard .clientLogoArtwork[data-brand="honor"] .clientLogoHeroImage,
+.touchCard .clientLogoArtwork[data-brand="careem"] .clientLogoHeroImage,
+.touchCard
+  .clientLogoArtwork[data-brand="volkswagen-group"]
+  .clientLogoHeroImage,
+.touchCard .clientLogoArtwork[data-brand="vw-group"] .clientLogoHeroImage,
+.touchCard .clientLogoArtwork[data-brand="mercedes-amg"] .clientLogoHeroImage,
+.touchCard
+  .clientLogoArtwork[data-brand="mercedes-benz-group"]
+  .clientLogoHeroImage,
+.touchCard .clientLogoArtwork[data-brand="bmw"] .clientLogoHeroImage,
+.touchCard .clientLogoArtwork[data-brand="toyota"] .clientLogoHeroImage,
+.touchCard .clientLogoArtwork[data-brand="general-motors"] .clientLogoHeroImage,
+.touchCard .clientLogoArtwork[data-brand="owne"] .clientLogoHeroImage {
+  object-fit: cover;
+}
+
+.touchTileWall {
+  display: grid;
+  width: 100%;
+  min-height: calc(100dvh - 14rem);
+  place-items: center;
+  padding: 0 clamp(1.2rem, 4vw, 2.4rem) 2rem;
+  overflow: visible;
+}
+
+.touchTileGrid {
+  --touch-tile-columns: 2;
+  --touch-tile-gap: clamp(0.55rem, 1.8vw, 0.9rem);
+
+  display: grid;
+  grid-template-columns: repeat(var(--touch-tile-columns), minmax(0, 1fr));
+  width: min(92vw, calc(50dvh - 6.5rem));
+  gap: var(--touch-tile-gap);
+}
+
+.touchTileItem {
+  min-width: 0;
+  aspect-ratio: 5 / 3;
+
+  > div,
+  > div > div {
+    height: 100%;
+  }
+}
+
+.touchTile {
+  width: 100%;
+  height: 100%;
+  border-color: rgb(255 255 255 / 10%);
+  border-radius: clamp(0.45rem, 1.5vw, 0.85rem);
+  box-shadow: 0 0.7rem 1.8rem rgb(0 0 0 / 28%);
+}
+
+@media (min-width: 600px) {
+  .touchTileWall {
+    min-height: calc(100dvh - 16rem);
+    padding-inline: clamp(2.4rem, 5vw, 5rem);
+  }
+
+  .touchTileGrid {
+    --touch-tile-columns: 3;
+    --touch-tile-gap: clamp(0.8rem, 1.5vw, 1.4rem);
+
+    width: 100%;
+  }
+
+  .touchTileItem:last-child:nth-child(3n + 1) {
+    grid-column: 2;
+  }
+}
+
+@media (min-width: 600px) and (orientation: landscape) {
+  .touchTileGrid {
+    --touch-tile-columns: 4;
+
+    width: min(100%, calc(166.667dvh - 35rem));
+  }
+
+  .touchTileItem:last-child:nth-child(3n + 1) {
+    grid-column: auto;
+  }
+}
+
+.clientBadge {
+  position: absolute;
+  z-index: 4;
+  top: 1.5rem;
+  right: 1.5rem;
+  display: grid;
+  width: clamp(7.6rem, 23%, 11.5rem);
+  height: 4.4rem;
+  place-items: center;
+  border: 1px solid rgb(255 255 255 / 50%);
+  border-radius: 0.8rem;
+  background: rgb(255 255 255 / 90%);
+  box-shadow: 0 0.8rem 2.4rem rgb(0 0 0 / 18%);
+  backdrop-filter: blur(10px);
+}
+
+.clientBadgeLogo {
+  position: relative;
+  width: calc(100% - 1.4rem);
+  height: calc(100% - 1.2rem);
+}
+
+.touchGallery {
+  width: 100%;
+  min-width: 0;
+  overflow: clip;
+  padding: 1.6rem 0 8rem;
+  perspective: 1200px;
+  perspective-origin: 50% 46%;
+}
+
+.touchGalleryStage {
+  width: 100%;
+  transform-style: preserve-3d;
+  transform-origin: 50% 54%;
+}
+
+.carousel {
+  width: 100%;
+  touch-action: pan-y;
+  perspective: 1200px;
+}
+
+.carouselContent {
+  align-items: center;
+  margin-left: -1.2rem;
+  transform-style: preserve-3d;
+}
+
+.carouselItem {
+  flex-basis: min(84%, 42rem);
+  padding-left: 1.2rem;
+}
+
+.touchCardStage {
+  aspect-ratio: 4 / 5;
+  width: 100%;
+  opacity: 0.3;
+  transition:
+    transform 420ms cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 300ms ease;
+  transform-style: preserve-3d;
+}
+
+.touchCard {
+  overflow: hidden;
+  box-shadow: 0 2rem 5rem rgb(0 0 0 / 45%);
+  touch-action: pan-y;
+  transform-style: preserve-3d;
+  transition: box-shadow 360ms ease;
+}
+
+.carouselDragging {
+  .touchCardStage {
+    transition: none;
+    will-change: transform, opacity;
+  }
+
+  .touchCard {
+    box-shadow: 0 2.8rem 6rem rgb(0 0 0 / 54%);
+  }
+}
+
+.touchCardRotator {
+  position: absolute;
+  display: block;
+  border-radius: inherit;
+  inset: 0;
+  transform-style: preserve-3d;
+}
+
+.touchCardFace {
+  position: absolute;
+  display: block;
+  overflow: hidden;
+  border-radius: inherit;
+  backface-visibility: hidden;
+  inset: 0;
+  transform: translateZ(0.6rem);
+  transform-style: preserve-3d;
+  -webkit-backface-visibility: hidden;
+}
+
+.touchCardFaceFront {
+  opacity: 1;
+}
+
+.touchCardFaceBack {
+  opacity: 0;
+  transform: rotateX(180deg) translateZ(0.6rem);
+}
+
+.touchCardSheen {
+  position: absolute;
+  z-index: 5;
+  border-radius: inherit;
+  background: linear-gradient(
+    112deg,
+    transparent 18%,
+    rgb(255 255 255 / 8%) 38%,
+    rgb(255 255 255 / 48%) 50%,
+    rgb(255 255 255 / 8%) 62%,
+    transparent 82%
+  );
+  background-position: 150% 0;
+  background-size: 240% 100%;
+  mix-blend-mode: screen;
+  opacity: 0;
+  pointer-events: none;
+  inset: 0;
+  transform: translateZ(1.2rem);
+}
+
+.touchCardRotatorFlipping {
+  animation: touch-card-flip 1250ms cubic-bezier(0.45, 0, 0.55, 1) both;
+  will-change: transform;
+
+  .touchCardFaceFront {
+    animation: project-card-front-face-visibility 1250ms linear both;
+  }
+
+  .touchCardFaceBack {
+    animation: project-card-back-face-visibility 1250ms linear both;
+  }
+
+  .touchCardSheen {
+    animation: touch-card-sheen 1250ms cubic-bezier(0.45, 0, 0.55, 1) both;
+  }
+}
+
+@keyframes touch-card-flip {
+  0% {
+    transform: translateZ(0) rotateX(0deg);
+  }
+
+  48%,
+  52% {
+    transform: translateZ(2rem) rotateX(90deg);
+  }
+
+  100% {
+    transform: translateZ(0) rotateX(180deg);
+  }
+}
+
+@keyframes touch-card-sheen {
+  0%,
+  14% {
+    background-position: 150% 0;
+    opacity: 0;
+  }
+
+  44% {
+    opacity: 0.62;
+  }
+
+  86%,
+  100% {
+    background-position: -60% 0;
+    opacity: 0;
+  }
+}
+
+.carouselControls {
+  display: grid;
+  grid-template-columns: 4.8rem minmax(0, 1fr) 4.8rem;
+  width: min(100% - 4rem, 48rem);
+  align-items: center;
+  gap: 1.6rem;
+  margin: 2.4rem auto 0;
+
+  > button {
+    display: inline-flex;
+    width: 4.8rem;
+    height: 4.8rem;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgb(255 255 255 / 16%);
+    border-radius: 999px;
+    background: var(--background-light);
+    color: var(--text);
+    cursor: pointer;
+
+    svg {
+      width: 2rem;
+      height: 2rem;
+    }
+  }
+}
+
+.dots {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(0.2rem, 0.8vw, 0.5rem);
+  overflow: hidden;
+
+  button {
+    position: relative;
+    display: inline-flex;
+    width: 2.4rem;
+    min-width: 0;
+    height: 4.4rem;
+    flex: 1 1 2.4rem;
+    align-items: center;
+    justify-content: center;
+    border: 0;
+    border-radius: 999px;
+    background: transparent;
+
+    &::before {
+      width: 0.7rem;
+      height: 0.7rem;
+      border-radius: 999px;
+      background: rgb(255 255 255 / 24%);
+      content: "";
+      transition:
+        width 180ms ease,
+        background 180ms ease;
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--brand);
+      outline-offset: -0.4rem;
+    }
+  }
+
+  .activeDot {
+    &::before {
+      width: min(2rem, 100%);
+      background: var(--brand);
+    }
+  }
+}
+
+@media (min-width: 700px) {
+  .carouselItem {
+    flex-basis: min(58%, 56rem);
+  }
+
+  .touchCardStage {
+    aspect-ratio: 4 / 3;
+  }
+
+  .touchGallery {
+    padding-bottom: 10rem;
+  }
+}
+
+@media (min-width: 1100px) {
+  .touchGallery {
+    padding-block: clamp(1.2rem, 2.2vh, 2.8rem) clamp(2.4rem, 4vh, 4.8rem);
+  }
+
+  .carouselItem {
+    flex-basis: clamp(38rem, 38vw, 54rem);
+  }
+
+  .touchCardStage {
+    aspect-ratio: 16 / 10;
+  }
+
+  .carouselControls {
+    margin-top: clamp(1.6rem, 2.4vh, 2.8rem);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .desktopCardRotatorFlipping,
+  .touchCardRotatorFlipping {
+    animation: none;
+  }
+
+  .cardMedia,
+  .dots button,
+  .touchCard,
+  .touchCardStage {
+    transition: none;
+  }
+}

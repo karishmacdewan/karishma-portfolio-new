@@ -1,0 +1,94 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" role="img" aria-labelledby="title desc">
+  <title id="title">Knowledge graph with an anomalous relationship</title>
+  <desc id="desc">A dense constellation of connected entities arranged into knowledge graph communities, with one anomalous node highlighted.</desc>
+  <defs>
+    <radialGradient id="background" cx="50%" cy="48%" r="76%">
+      <stop offset="0" stop-color="#102b46"/>
+      <stop offset=".52" stop-color="#071827"/>
+      <stop offset="1" stop-color="#02070d"/>
+    </radialGradient>
+    <radialGradient id="node" cx="38%" cy="32%" r="70%">
+      <stop stop-color="#d8ffff"/>
+      <stop offset=".28" stop-color="#58dddf"/>
+      <stop offset="1" stop-color="#12668b"/>
+    </radialGradient>
+    <radialGradient id="violetNode" cx="38%" cy="32%" r="70%">
+      <stop stop-color="#fff0ff"/>
+      <stop offset=".28" stop-color="#d88bff"/>
+      <stop offset="1" stop-color="#7137b9"/>
+    </radialGradient>
+    <linearGradient id="activePath" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#58f2d5"/>
+      <stop offset=".52" stop-color="#6fa8ff"/>
+      <stop offset="1" stop-color="#dc72ff"/>
+    </linearGradient>
+    <pattern id="microGrid" width="48" height="48" patternUnits="userSpaceOnUse">
+      <path d="M48 0H0V48" fill="none" stroke="#8ebbd2" stroke-opacity=".055"/>
+    </pattern>
+    <filter id="softGlow" x="-100%" y="-100%" width="300%" height="300%">
+      <feGaussianBlur stdDeviation="10" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="wideGlow" x="-160%" y="-160%" width="420%" height="420%">
+      <feGaussianBlur stdDeviation="24" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <rect width="1600" height="1000" fill="url(#background)"/>
+  <rect width="1600" height="1000" fill="url(#microGrid)"/>
+
+  <g fill="none" stroke="#75b4c9" stroke-linecap="round">
+    <g stroke-opacity=".18" stroke-width="2">
+      <path d="M106 236 242 132 365 248 515 156 647 270 790 148 932 254 1072 140 1204 258 1370 174 1502 286"/>
+      <path d="M82 506 230 386 365 520 520 390 647 516 806 374 932 520 1088 390 1230 520 1380 404 1520 532"/>
+      <path d="M118 792 256 666 392 808 532 674 676 808 820 658 964 800 1106 672 1248 804 1390 666 1512 796"/>
+      <path d="M106 236 230 386 256 666M242 132 365 248 365 520 392 808M515 156 520 390 532 674M647 270 647 516 676 808"/>
+      <path d="M790 148 806 374 820 658M932 254 932 520 964 800M1072 140 1088 390 1106 672M1204 258 1230 520 1248 804"/>
+      <path d="M1370 174 1380 404 1390 666M1502 286 1520 532 1512 796"/>
+      <path d="M106 236 365 520 532 674M242 132 520 390 676 808M365 248 647 516 820 658M515 156 806 374 964 800"/>
+      <path d="M647 270 932 520 1106 672M790 148 1088 390 1248 804M932 254 1230 520 1390 666M1072 140 1380 404 1512 796"/>
+      <path d="M82 506 365 248M230 386 515 156M256 666 520 390M392 808 647 516M532 674 806 374"/>
+      <path d="M676 808 932 520M820 658 1088 390M964 800 1230 520M1106 672 1370 174M1248 804 1520 532"/>
+    </g>
+    <g stroke="#5debd9" stroke-opacity=".34" stroke-width="3">
+      <path d="M230 386 365 520 520 390 647 516 806 374 932 520"/>
+      <path d="M806 374 932 254 1088 390 1204 258 1380 404"/>
+      <path d="M647 516 820 658 964 800 1106 672 1230 520"/>
+    </g>
+  </g>
+
+  <g fill="#071724" stroke="#62b8cb" stroke-width="2.5">
+    <circle cx="106" cy="236" r="13"/><circle cx="242" cy="132" r="18"/><circle cx="365" cy="248" r="11"/><circle cx="515" cy="156" r="15"/>
+    <circle cx="647" cy="270" r="20"/><circle cx="790" cy="148" r="12"/><circle cx="932" cy="254" r="17"/><circle cx="1072" cy="140" r="11"/>
+    <circle cx="1204" cy="258" r="16"/><circle cx="1370" cy="174" r="12"/><circle cx="1502" cy="286" r="15"/>
+    <circle cx="82" cy="506" r="12"/><circle cx="230" cy="386" r="18"/><circle cx="365" cy="520" r="21"/><circle cx="520" cy="390" r="13"/>
+    <circle cx="647" cy="516" r="17"/><circle cx="806" cy="374" r="22"/><circle cx="932" cy="520" r="13"/><circle cx="1088" cy="390" r="18"/>
+    <circle cx="1230" cy="520" r="20"/><circle cx="1380" cy="404" r="13"/><circle cx="1520" cy="532" r="17"/>
+    <circle cx="118" cy="792" r="16"/><circle cx="256" cy="666" r="12"/><circle cx="392" cy="808" r="19"/><circle cx="532" cy="674" r="14"/>
+    <circle cx="676" cy="808" r="17"/><circle cx="820" cy="658" r="12"/><circle cx="964" cy="800" r="21"/><circle cx="1106" cy="672" r="15"/>
+    <circle cx="1248" cy="804" r="13"/><circle cx="1390" cy="666" r="18"/><circle cx="1512" cy="796" r="11"/>
+  </g>
+
+  <g fill="url(#node)" filter="url(#softGlow)">
+    <circle cx="242" cy="132" r="8"/><circle cx="647" cy="270" r="9"/><circle cx="932" cy="254" r="8"/><circle cx="1204" cy="258" r="7"/>
+    <circle cx="230" cy="386" r="8"/><circle cx="365" cy="520" r="10"/><circle cx="647" cy="516" r="8"/><circle cx="806" cy="374" r="11"/>
+    <circle cx="1088" cy="390" r="8"/><circle cx="1230" cy="520" r="10"/><circle cx="392" cy="808" r="9"/><circle cx="676" cy="808" r="8"/>
+    <circle cx="964" cy="800" r="10"/><circle cx="1390" cy="666" r="8"/>
+  </g>
+
+  <path d="M230 386 365 520 647 516 806 374 932 254 1088 390 1230 520 1390 666" fill="none" stroke="url(#activePath)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" filter="url(#softGlow)"/>
+  <g fill="url(#violetNode)" filter="url(#wideGlow)"><circle cx="1230" cy="520" r="15"/></g>
+  <g fill="none" stroke="#dd7aff" filter="url(#softGlow)">
+    <circle cx="1230" cy="520" r="48" stroke-width="4"/>
+    <circle cx="1230" cy="520" r="72" stroke-width="2" stroke-opacity=".4"/>
+    <circle cx="1230" cy="520" r="98" stroke-width="1" stroke-opacity=".18"/>
+  </g>
+
+  <g fill="#d9ffff" opacity=".7">
+    <circle cx="106" cy="236" r="4"/><circle cx="515" cy="156" r="4"/><circle cx="790" cy="148" r="4"/><circle cx="1072" cy="140" r="4"/>
+    <circle cx="1370" cy="174" r="4"/><circle cx="82" cy="506" r="4"/><circle cx="520" cy="390" r="4"/><circle cx="932" cy="520" r="4"/>
+    <circle cx="1380" cy="404" r="4"/><circle cx="1520" cy="532" r="4"/><circle cx="118" cy="792" r="4"/><circle cx="532" cy="674" r="4"/>
+    <circle cx="820" cy="658" r="4"/><circle cx="1106" cy="672" r="4"/><circle cx="1248" cy="804" r="4"/><circle cx="1512" cy="796" r="4"/>
+  </g>
+</svg>

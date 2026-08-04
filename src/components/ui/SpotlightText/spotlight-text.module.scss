@@ -1,0 +1,59 @@
+.spotlightText {
+  --spotlight-x: 50%;
+  --spotlight-y: 50%;
+  --spotlight-core: #fff;
+  --spotlight-tint: #bfdbfe;
+  --spotlight-halo: rgb(147 197 253 / 68%);
+  --spotlight-opacity: 0.92;
+  --spotlight-width: 10%;
+
+  position: relative;
+  display: inline-block;
+
+  &::after {
+    position: absolute;
+    z-index: 2;
+    color: transparent;
+    background: radial-gradient(
+      ellipse var(--spotlight-width) 135% at var(--spotlight-x)
+        var(--spotlight-y),
+      var(--spotlight-core) 0%,
+      var(--spotlight-tint) 14%,
+      var(--spotlight-halo) 30%,
+      transparent 62%
+    );
+    background-clip: text;
+    content: attr(data-spotlight-text);
+    font: inherit;
+    letter-spacing: inherit;
+    line-height: inherit;
+    opacity: var(--spotlight-opacity);
+    pointer-events: none;
+    text-align: inherit;
+    transition:
+      filter 140ms ease,
+      opacity 140ms ease;
+    white-space: inherit;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    inset: 0;
+  }
+
+  &[data-spotlight-hovered="true"]::after {
+    filter: drop-shadow(0 0 0.75rem var(--spotlight-halo));
+    opacity: 1;
+  }
+}
+
+@media (hover: none), (pointer: coarse) {
+  .spotlightText::after {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .spotlightText::after {
+    background-position: 50% 50%;
+    animation: none;
+  }
+}

@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" role="img" aria-labelledby="title desc">
+  <title id="title">Cyber knowledge graph</title>
+  <desc id="desc">A luminous network graph with an agentic query path on a dark technical grid.</desc>
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="48%" r="75%">
+      <stop offset="0" stop-color="#0b2b38"/>
+      <stop offset="0.5" stop-color="#071521"/>
+      <stop offset="1" stop-color="#02060c"/>
+    </radialGradient>
+    <linearGradient id="path" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#44f5d0"/>
+      <stop offset="0.55" stop-color="#55a6ff"/>
+      <stop offset="1" stop-color="#b26aff"/>
+    </linearGradient>
+    <pattern id="grid" width="64" height="64" patternUnits="userSpaceOnUse">
+      <path d="M64 0H0V64" fill="none" stroke="#4b91a8" stroke-opacity=".09"/>
+      <circle cx="0" cy="0" r="1.5" fill="#6dded7" fill-opacity=".22"/>
+    </pattern>
+    <filter id="glow" x="-100%" y="-100%" width="300%" height="300%">
+      <feGaussianBlur stdDeviation="10" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="1600" height="1000" fill="url(#bg)"/>
+  <rect width="1600" height="1000" fill="url(#grid)"/>
+  <g fill="none" stroke="#58aabe" stroke-opacity=".2" stroke-width="2">
+    <path d="M65 810 260 625 445 722 610 502 780 595 930 342 1115 445 1300 260 1535 385"/>
+    <path d="M120 245 315 385 490 250 650 410 835 180 1015 292 1208 175 1450 290"/>
+    <path d="M260 625 315 385M445 722 650 410M610 502 490 250M780 595 1015 292M930 342 835 180M1115 445 1208 175M1300 260 1450 290"/>
+    <path d="M120 245 260 625M315 385 610 502M490 250 780 595M650 410 930 342M835 180 1115 445M1015 292 1300 260M1208 175 1535 385"/>
+  </g>
+  <g fill="#07131d" stroke="#63c7d1" stroke-opacity=".75" stroke-width="3">
+    <circle cx="120" cy="245" r="15"/><circle cx="260" cy="625" r="20"/><circle cx="315" cy="385" r="13"/>
+    <circle cx="445" cy="722" r="14"/><circle cx="490" cy="250" r="20"/><circle cx="610" cy="502" r="14"/>
+    <circle cx="650" cy="410" r="18"/><circle cx="780" cy="595" r="16"/><circle cx="835" cy="180" r="13"/>
+    <circle cx="930" cy="342" r="22"/><circle cx="1015" cy="292" r="13"/><circle cx="1115" cy="445" r="17"/>
+    <circle cx="1208" cy="175" r="13"/><circle cx="1300" cy="260" r="20"/><circle cx="1450" cy="290" r="14"/><circle cx="1535" cy="385" r="17"/>
+  </g>
+  <path d="M65 810 260 625 610 502 930 342 1115 445 1300 260 1535 385" fill="none" stroke="url(#path)" stroke-width="9" stroke-linecap="round" stroke-linejoin="round" filter="url(#glow)"/>
+  <g fill="#d9fffb" filter="url(#glow)">
+    <circle cx="65" cy="810" r="10"/><circle cx="260" cy="625" r="12"/><circle cx="610" cy="502" r="10"/>
+    <circle cx="930" cy="342" r="14"/><circle cx="1115" cy="445" r="10"/><circle cx="1300" cy="260" r="12"/><circle cx="1535" cy="385" r="10"/>
+  </g>
+  <g font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#8be2de">
+    <text x="70" y="92" font-size="22" letter-spacing="6" opacity=".76">GRAPH INTELLIGENCE // AGENT ACTIVE</text>
+    <text x="70" y="132" font-size="16" opacity=".42">MATCH (ENTITY)-[RELATIONSHIP*]-&gt;(SIGNAL)</text>
+    <text x="1240" y="860" font-size="16" opacity=".5">PATH CONFIDENCE  98.7%</text>
+    <text x="1240" y="895" font-size="16" fill="#b878ff" opacity=".8">ANOMALY DETECTED</text>
+  </g>
+  <g fill="none" stroke="#80ffdb" stroke-opacity=".28">
+    <circle cx="930" cy="342" r="50"/><circle cx="930" cy="342" r="75"/>
+    <path d="M930 250V276M930 408V434M838 342H864M996 342H1022"/>
+  </g>
+</svg>

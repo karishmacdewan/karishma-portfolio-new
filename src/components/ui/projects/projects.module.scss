@@ -1,0 +1,513 @@
+.dialogContent {
+  width: min(92vw, 110rem);
+  max-width: 110rem;
+  max-height: min(90dvh, 92rem);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  border: 1px solid rgb(255 255 255 / 14%);
+  border-radius: 1.6rem;
+  background: var(--background-dark);
+  padding: clamp(1.8rem, 4vw, 4rem);
+  scrollbar-gutter: stable;
+}
+
+.dialogHeader {
+  padding-right: 4.8rem;
+  text-align: left;
+}
+
+.dialogTitle {
+  font-size: clamp(2.8rem, 5vw, 5.2rem);
+  line-height: 1.02;
+}
+
+.headline {
+  max-width: 80rem;
+  color: var(--brand);
+  font-size: clamp(1.6rem, 2.2vw, 2.4rem);
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+.description {
+  color: rgb(235 236 243 / 82%);
+  font-size: clamp(1.5rem, 1.8vw, 1.9rem);
+  line-height: 1.55;
+}
+
+.descriptionList {
+  display: grid;
+  gap: 1rem;
+  padding-left: 2.2rem;
+  list-style: disc;
+}
+
+.warning {
+  margin-top: 1rem;
+  font-size: 1.4rem;
+}
+
+.centered {
+  position: relative;
+  overflow: hidden;
+  border-radius: 1rem;
+  background: var(--background-light);
+  aspect-ratio: 16 / 9;
+}
+
+.projectMedia {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.dialogFooter {
+  display: flex;
+  gap: 1rem;
+}
+
+@media (max-width: 700px) {
+  .dialogContent {
+    width: calc(100vw - 1.6rem);
+    max-height: calc(100dvh - 1.6rem);
+    border-radius: 1.2rem;
+    padding: 1.6rem;
+  }
+
+  .dialogHeader {
+    padding-right: 3.6rem;
+  }
+
+  .centered {
+    aspect-ratio: 4 / 3;
+  }
+
+  .dialogFooter {
+    flex-direction: column;
+
+    a,
+    button {
+      width: 100%;
+    }
+  }
+}
+
+.liquidDialogOverlay {
+  position: fixed;
+  z-index: 80;
+  background:
+    radial-gradient(circle at 50% 42%, rgb(96 165 250 / 12%), transparent 42%),
+    rgb(4 0 12 / 72%);
+  backdrop-filter: blur(1.6rem) saturate(115%);
+  inset: 0;
+
+  &[data-state="open"] {
+    animation: liquid-dialog-overlay-in 360ms ease-out both;
+  }
+
+  &[data-state="closed"] {
+    animation: liquid-dialog-overlay-out 240ms ease-in both;
+  }
+}
+
+.liquidDialogContent {
+  position: fixed;
+  z-index: 81;
+  top: 50%;
+  left: 50%;
+  width: min(92vw, 112rem);
+  height: min(82dvh, 74rem);
+  max-height: calc(100dvh - 4rem);
+  overflow: hidden;
+  border: 1px solid rgb(255 255 255 / 24%);
+  border-radius: clamp(1.8rem, 2.4vw, 3.2rem);
+  outline: none;
+  background: rgb(18 10 35 / 42%);
+  box-shadow:
+    0 4rem 12rem rgb(0 0 0 / 62%),
+    inset 0 1px 0 rgb(255 255 255 / 26%),
+    inset 0 -1px 0 rgb(96 165 250 / 12%);
+  isolation: isolate;
+  transform-origin: center;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+
+  &[data-state="open"] {
+    animation: liquid-dialog-swivel-in 820ms linear both;
+  }
+
+  &[data-state="closed"] {
+    animation: liquid-dialog-swivel-out 280ms ease-in both;
+  }
+}
+
+.liquidDialogContent[data-client-brand="fab"] {
+  background: #000;
+
+  .liquidDialogBackdrop {
+    background: #000;
+  }
+}
+
+.liquidDialogBackdrop {
+  position: absolute;
+  opacity: 0.52;
+  filter: blur(1.4rem) saturate(145%) contrast(105%);
+  inset: -8%;
+  transform: scale(1.06);
+}
+
+.liquidDialogBackdropMedia {
+  position: absolute !important;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: contain !important;
+  inset: 0 !important;
+}
+
+.liquidDialogGlass {
+  position: absolute;
+  z-index: 1;
+  overflow: hidden;
+  background:
+    linear-gradient(128deg, rgb(255 255 255 / 13%), transparent 28%, rgb(96 165 250 / 5%) 66%, rgb(255 45 154 / 7%)),
+    rgb(12 5 28 / 32%);
+  backdrop-filter: blur(1.5rem) saturate(165%);
+  inset: 0;
+
+  &::before,
+  &::after {
+    position: absolute;
+    border-radius: 999px;
+    content: "";
+    filter: blur(0.4rem);
+    pointer-events: none;
+  }
+
+  &::before {
+    top: -28%;
+    left: -12%;
+    width: 58%;
+    background: radial-gradient(circle, rgb(96 165 250 / 22%), transparent 68%);
+    aspect-ratio: 1;
+  }
+
+  &::after {
+    right: -18%;
+    bottom: -46%;
+    width: 66%;
+    background: radial-gradient(circle, rgb(255 45 154 / 16%), transparent 68%);
+    aspect-ratio: 1;
+  }
+}
+
+.liquidDialogBody {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: clamp(3.2rem, 6vw, 7.2rem);
+  overflow-y: auto;
+  scrollbar-gutter: stable;
+}
+
+.liquidDialogHeader {
+  display: grid;
+  width: 100%;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: start;
+  gap: clamp(1.6rem, 3vw, 3.6rem);
+  padding-right: 5.6rem;
+}
+
+.liquidDialogHeading {
+  min-width: 0;
+}
+
+.liquidDialogEyebrow {
+  margin-bottom: 1.4rem;
+  color: #93c5fd;
+  font-family: monospace;
+  font-size: clamp(1.05rem, 1vw, 1.3rem);
+  font-weight: 650;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.liquidDialogTitle {
+  display: flex;
+  max-width: 98rem;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.35em;
+  margin: 0;
+  font-size: clamp(1.9rem, 2.35vw, 3.2rem);
+  font-weight: 850;
+  letter-spacing: 0.055em;
+  line-height: 1.08;
+  text-transform: uppercase;
+  text-wrap: pretty;
+}
+
+.liquidDialogTitleLead {
+  color: #dbeafe;
+  text-shadow: 0 0 2.4rem rgb(96 165 250 / 28%);
+}
+
+.liquidDialogTitleDivider {
+  color: #60a5fa;
+  font-weight: 500;
+}
+
+.liquidDialogTitleContext {
+  color: #f0abfc;
+  text-shadow: 0 0 2.2rem rgb(255 45 154 / 24%);
+}
+
+.liquidDialogTimeline {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.85rem 1.2rem;
+  border: 1px solid rgb(226 232 240 / 22%);
+  border-radius: 999px;
+  background: rgb(15 23 42 / 42%);
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 12%),
+    0 0 2.4rem rgb(96 165 250 / 10%);
+  color: #e2e8f0;
+  font-family: monospace;
+  font-size: clamp(1.05rem, 1vw, 1.25rem);
+  letter-spacing: 0.055em;
+  line-height: 1;
+  white-space: nowrap;
+  backdrop-filter: blur(1.2rem);
+
+  &::before {
+    width: 0.65rem;
+    border-radius: 0.15rem;
+    background: linear-gradient(135deg, #60a5fa, #f0abfc);
+    box-shadow: 0 0 1rem rgb(147 197 253 / 62%);
+    content: "";
+    transform: rotate(45deg);
+    aspect-ratio: 1;
+  }
+}
+
+.liquidDialogLead {
+  width: 100%;
+  max-width: 98rem;
+  margin-top: clamp(2.4rem, 4vh, 4rem);
+  color: rgb(239 246 255 / 88%);
+  font-size: clamp(1.7rem, 1.8vw, 2.25rem);
+  font-weight: 520;
+  line-height: 1.5;
+}
+
+.liquidDialogPoints {
+  display: grid;
+  width: 100%;
+  max-width: 98rem;
+  gap: 1.25rem;
+  margin: 2.2rem 0 0;
+  padding: 0;
+  color: rgb(235 236 243 / 70%);
+  font-size: clamp(1.4rem, 1.35vw, 1.75rem);
+  line-height: 1.65;
+  list-style: none;
+
+  li {
+    display: grid;
+    grid-template-columns: 2.6rem minmax(0, 1fr);
+    align-items: start;
+    gap: 0.7rem;
+  }
+}
+
+.liquidDialogPointArrow {
+  color: #93c5fd;
+  font-family: monospace;
+  font-size: 1.8rem;
+  line-height: 1.45;
+  text-shadow:
+    0 0 0.8rem rgb(96 165 250 / 78%),
+    0 0 1.6rem rgb(255 45 154 / 24%);
+}
+
+.liquidDialogFooter {
+  width: 100%;
+  margin-top: auto;
+  padding-top: clamp(2.8rem, 5vh, 5rem);
+}
+
+.liquidDialogWarning {
+  max-width: 98rem;
+  margin: 0 0 1.4rem;
+  color: rgb(226 232 240 / 58%);
+  font-family: monospace;
+  font-size: 1.15rem;
+  line-height: 1.5;
+}
+
+.liquidDialogRedactedNotice {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  max-width: 98rem;
+  margin: 0 0 1.4rem;
+  color: rgb(253 164 175 / 82%);
+  font-family: monospace;
+  font-size: 1.15rem;
+  letter-spacing: 0.025em;
+  line-height: 1.5;
+
+  &::before {
+    width: 0.8rem;
+    border-radius: 0.2rem;
+    background: linear-gradient(135deg, #fb7185, #be123c);
+    box-shadow: 0 0 1.2rem rgb(225 29 72 / 52%);
+    content: "";
+    transform: rotate(45deg);
+    aspect-ratio: 1;
+  }
+}
+
+.liquidDialogTools {
+  width: 100%;
+  max-width: 100%;
+
+  > ul {
+    justify-content: center;
+    padding: 0;
+  }
+}
+
+.liquidDialogClose {
+  position: absolute;
+  z-index: 4;
+  top: clamp(1.6rem, 2.4vw, 2.8rem);
+  right: clamp(1.6rem, 2.4vw, 2.8rem);
+  display: grid;
+  width: 4.8rem;
+  border: 1px solid rgb(255 255 255 / 18%);
+  border-radius: 999px;
+  place-items: center;
+  background: rgb(8 3 20 / 44%);
+  color: rgb(255 255 255 / 82%);
+  cursor: pointer;
+  backdrop-filter: blur(1.6rem);
+  aspect-ratio: 1;
+  transition:
+    border-color 180ms ease,
+    background 180ms ease,
+    color 180ms ease,
+    transform 180ms ease;
+
+  svg {
+    width: 2.1rem;
+    height: 2.1rem;
+  }
+
+  &:hover {
+    border-color: rgb(147 197 253 / 58%);
+    background: rgb(59 130 246 / 18%);
+    color: #fff;
+    transform: rotate(6deg) scale(1.04);
+  }
+
+  &:focus-visible {
+    outline: 3px solid rgb(96 165 250 / 78%);
+    outline-offset: 0.4rem;
+  }
+}
+
+@keyframes liquid-dialog-overlay-in {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes liquid-dialog-overlay-out {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes liquid-dialog-swivel-in {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) perspective(1600px) rotateY(-84deg) scale(0.44);
+    animation-timing-function: cubic-bezier(0.32, 0, 0.25, 1);
+  }
+
+  44% {
+    opacity: 1;
+    transform: translate(-50%, -50%) perspective(1600px) rotateY(0deg) scale(0.52);
+    animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translate(-50%, -50%) perspective(1600px) rotateY(0deg) scale(1);
+  }
+}
+
+@keyframes liquid-dialog-swivel-out {
+  from {
+    opacity: 1;
+    transform: translate(-50%, -50%) perspective(1600px) rotateY(0deg) scale(1);
+  }
+
+  to {
+    opacity: 0;
+    transform: translate(-50%, -50%) perspective(1600px) rotateY(18deg) scale(0.86);
+  }
+}
+
+@media (max-width: 700px) {
+  .liquidDialogContent {
+    width: calc(100vw - 1.6rem);
+    height: calc(100dvh - 1.6rem);
+    max-height: none;
+    border-radius: 1.8rem;
+  }
+
+  .liquidDialogBody {
+    padding: 5.6rem 2.2rem 2.4rem;
+  }
+
+  .liquidDialogHeader {
+    grid-template-columns: 1fr;
+    gap: 1.4rem;
+    padding-right: 4.8rem;
+  }
+
+  .liquidDialogTimeline {
+    width: fit-content;
+  }
+
+  .liquidDialogTitle {
+    font-size: clamp(1.8rem, 6vw, 2.8rem);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .liquidDialogOverlay,
+  .liquidDialogContent {
+    animation-duration: 1ms !important;
+  }
+}
