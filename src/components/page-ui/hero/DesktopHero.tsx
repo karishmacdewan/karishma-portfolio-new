@@ -243,8 +243,13 @@ export function DesktopHero({
               <span className={styles.heroAccent}>.</span>
             </h1>
             <p className={styles.heroSupportLine}>
-              Most AI is built through only one lens. I build across all three —
-              for companies that care how AI feels, not just what it does.
+              <span className={styles.heroSubtitleLine}>
+                Most AI is built through only one lens. I build across all three
+                —
+              </span>
+              <span className={styles.heroSubtitleLine}>
+                for companies that care how AI feels, not just what it does.
+              </span>
             </p>
           </div>
           <div className={styles.heroScreenDetails} aria-hidden="true">

@@ -190,14 +190,19 @@
 }
 
 .heroSupportLine {
-  max-width: min(78rem, calc(100vw - 10rem));
-  margin: 1.8rem auto 0;
+  width: min(920px, calc(100% - 48px));
+  margin: 22px auto 0;
   color: var(--text-secondary);
   font-family: Geist, "Geist Sans", ui-sans-serif, system-ui, sans-serif;
-  font-size: clamp(1.4rem, 1.15vw, 1.8rem);
-  font-weight: 400;
-  letter-spacing: 0.005em;
-  line-height: 1.35;
+  font-size: clamp(15px, 1.12vw, 18px);
+  font-weight: 380;
+  letter-spacing: -0.012em;
+  line-height: 1.42;
+  text-align: center;
+}
+
+.heroSubtitleLine {
+  display: block;
 }
 
 .heroScreenDetails {
@@ -352,12 +357,18 @@
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 760px) {
   .heroSupportLine {
-    max-width: calc(100vw - 4.8rem);
-    margin-top: 1.4rem;
-    font-size: 1.2rem;
-    line-height: 1.35;
+    width: min(560px, calc(100% - 40px));
+    text-wrap: balance;
+  }
+
+  .heroSubtitleLine {
+    display: inline;
+  }
+
+  .heroSubtitleLine + .heroSubtitleLine::before {
+    content: " ";
   }
 
   .heroScreenDetails {
