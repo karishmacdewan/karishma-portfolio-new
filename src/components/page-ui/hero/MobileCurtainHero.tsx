@@ -231,7 +231,7 @@ export function MobileCurtainHero({
           </div>
           <div className={styles.heroScreenDetails} aria-hidden="true">
             <p className={styles.heroScreenLeft}>
-              Senior AI Strategy &amp; Digital Transformation Lead · ex-Google
+              Strategic Partnerships &amp; AI Transformation Lead
             </p>
             <p className={styles.heroScreenRight}>
               Selected advisory, transformation and interim engagements
