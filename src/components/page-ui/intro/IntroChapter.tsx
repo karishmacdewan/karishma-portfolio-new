@@ -23,7 +23,7 @@ type IntroChapterProps = {
 const impactPoints = [
     {
         id: '10-years',
-        metric: '10 years',
+        metric: '10+ years',
         description: 'leading strategy, data and digital transformation across Google, Amazon and global enterprises'
     },
     {
